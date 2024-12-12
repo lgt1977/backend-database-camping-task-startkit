@@ -23,12 +23,21 @@ INSERT INTO "USER"(name, email, ROLE) VALUES
        ('透明人', 'opacity0@hexschooltest.io', 'USER');
 
 -- 1-2 修改：用 Email 找到 李燕容、肌肉棒子、Q太郎，如果他的 Role 為 USER 將他的 Role 改為 COACH
+UPDATE "USER"
+SET "role" = 'coach'
+WHERE email IN ( 
+    SELECT email
+	FROM "USER"
+	WHERE name IN ('李燕容', '肌肉棒子', 'Q太郎')) ;
 
 -- 1-3 刪除：刪除USER 資料表中，用 Email 找到透明人，並刪除該筆資料
+DELETE FROM "USER" WHERE email = NULL ;
 
 -- 1-4 查詢：取得USER 資料表目前所有用戶數量（提示：使用count函式）
+SELECT count(*) FROM "USER";
 
 -- 1-5 查詢：取得 USER 資料表所有用戶資料，並列出前 3 筆（提示：使用limit語法）
+SELECT *FROM "USER" LIMIT 3;
 
 
 --  ████████  █████   █    ████  
@@ -42,6 +51,11 @@ INSERT INTO "USER"(name, email, ROLE) VALUES
     -- 1. 名稱為 `7 堂組合包方案`，價格為`1,400` 元，堂數為`7`
     -- 2. 名稱為`14 堂組合包方案`，價格為`2,520` 元，堂數為`14`
     -- 3. 名稱為 `21 堂組合包方案`，價格為`4,800` 元，堂數為`21`
+INSERT INTO "CREDIT_PACKAGE"(name, price, credit_amount) 
+VALUES
+('7堂組合包方案', 1400, 7), 
+('14堂組合包方案', 2520, 14), 
+('21堂組合包方案', 4800, 21);
 
 -- 2-2. 新增：在 `CREDIT_PURCHASE` 資料表，新增三筆資料：（請使用 name 欄位做子查詢）
     -- 1. `王小明` 購買 `14 堂組合包方案`
